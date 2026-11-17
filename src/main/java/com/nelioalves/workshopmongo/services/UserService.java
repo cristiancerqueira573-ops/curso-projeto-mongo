@@ -44,7 +44,15 @@ public class UserService {
         return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 
-
+    public User delete(String id) {
+        User user = repository.findById(id).orElse(null);
+        if (user == null) {
+            throw new ObjectNotFoundException("Object not found");
+        } else {
+            repository.deleteById(id);
+            return user;
+        }
+    }
 
 
 

@@ -1,5 +1,6 @@
 package com.nelioalves.workshopmongo.resources;
 
+import com.nelioalves.workshopmongo.domain.Post;
 import com.nelioalves.workshopmongo.domain.User;
 import com.nelioalves.workshopmongo.dto.UserDTO;
 import com.nelioalves.workshopmongo.services.UserService;
@@ -65,6 +66,21 @@ public ResponseEntity<UserDTO> update(@RequestBody UserDTO objDto, @PathVariable
         obj = userService.update(obj);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+
+        User obj = userService.findById(id);
+        System.out.println(obj.getPosts().size());
+        return ResponseEntity.ok().body(obj.getPosts());
+
+
+    }
+
+
+
+
+
 
 
 
